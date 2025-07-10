@@ -59,14 +59,25 @@ public class CartService {
     
     public void removeFromCart(User user, Long productId) {
         Cart cart = getOrCreateCart(user);
-        cartItemRepository.findByCart(cart).stream()
-            .filter(item -> item.getProduct().getId().equals(productId))
-            .findFirst()
-            .ifPresent(item -> {
-                cartItemRepository.delete(item);
-                updateCartTotal(cart);
-            });
+
+        Optional<CartItem> itemOpt = cartItemRepository.findByCart(cart).stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst();
+
+        if (itemOpt.isPresent()) {
+            CartItem item = itemOpt.get();
+
+            // 1. Remove from cart list
+            cart.getCartItems().remove(item);
+
+            // 2. Delete from DB
+            cartItemRepository.delete(item);
+
+            // 3. Recalculate and save cart
+            updateCartTotal(cart);
+        }
     }
+
     
     public void updateCartItemQuantity(User user, Long productId, Integer quantity) {
         Cart cart = getOrCreateCart(user);
