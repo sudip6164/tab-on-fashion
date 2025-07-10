@@ -82,7 +82,7 @@ public class AuthController {
             if (user.getRole() == com.tabonfashion.entity.User.Role.ADMIN) {
                 return "redirect:/admin/dashboard";
             } else {
-                return "redirect:/dashboard";
+                return "redirect:/";
             }
             
         } catch (Exception e) {
