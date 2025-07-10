@@ -20,39 +20,36 @@ public class AuthController {
     @Autowired
     private UserService userService;
     
-    // Show signup form
-    @GetMapping("/signup")
-    public String showSignupForm(Model model) {
-        model.addAttribute("signupRequest", new SignupRequest());
-        return "auth/signup";
-    }
-    
-    // Process signup
     @PostMapping("/signup")
     public String processSignup(@Valid @ModelAttribute SignupRequest signupRequest,
-                               BindingResult bindingResult,
-                               Model model,
-                               RedirectAttributes redirectAttributes) {
-        
+                                BindingResult bindingResult,
+                                Model model) {
+
+        model.addAttribute("loginRequest", new LoginRequest());
+
+        // Show signup form on validation errors
         if (bindingResult.hasErrors()) {
-            return "auth/signup";
+            model.addAttribute("activeTab", "signup");
+            return "auth/login";
         }
-        
+
         try {
             UserResponse user = userService.signup(signupRequest);
-            redirectAttributes.addFlashAttribute("successMessage", 
-                "Account created successfully! Please login.");
-            return "redirect:/auth/login";
+            model.addAttribute("successMessage", "Account created successfully! Please login.");
+            model.addAttribute("activeTab", "login");
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "auth/signup";
+            model.addAttribute("activeTab", "signup");
         }
+
+        return "auth/login";
     }
     
     // Show login form
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
+        model.addAttribute("signupRequest", new SignupRequest());
         return "auth/login";
     }
     
@@ -63,6 +60,7 @@ public class AuthController {
                               Model model,
                               HttpSession session,
                               RedirectAttributes redirectAttributes) {
+        model.addAttribute("signupRequest", new SignupRequest());
         
         if (bindingResult.hasErrors()) {
             return "auth/login";

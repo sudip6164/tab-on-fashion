@@ -43,15 +43,13 @@ public class UserService {
         
         // Save user
         User savedUser = userRepository.save(user);
-        
         return new UserResponse(savedUser);
     }
     
     public UserResponse login(LoginRequest loginRequest) throws Exception {
         // Find user by username or email
-        Optional<User> userOptional = userRepository.findByUsernameOrEmail(
-            loginRequest.getUsernameOrEmail(), 
-            loginRequest.getUsernameOrEmail()
+        Optional<User> userOptional = userRepository.findByEmail(
+            loginRequest.getEmail()
         );
         
         if (userOptional.isEmpty()) {

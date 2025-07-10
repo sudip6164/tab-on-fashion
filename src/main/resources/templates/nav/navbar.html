@@ -26,7 +26,7 @@
 					</a>
 					<div class="relative user-dropdown">
 						<button class="text-gray-600 hover:text-purple-600 p-2">
-							<i class="fas fa-user text-xl"></i><span th:if="${user != null}"
+							<i class="fas fa-user text-xl"></i><span> </span><span th:if="${user != null}"
 								th:text="${user.username}">User</span>
 						</button>
 						<div
@@ -34,10 +34,6 @@
 							<a th:if="${user == null}" href="/auth/login"
 								class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
 								<i class="fas fa-sign-in-alt mr-2"></i>Login
-							</a>
-							<a th:if="${user == null}" href="/auth/signup"
-								class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
-								<i class="fas fa-sign-in-alt mr-2"></i>Signup
 							</a>
 							<a th:if="${user != null}" href="/profile"
 								class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
