@@ -4,236 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${product.name} + ' - Tab On Fashion'">Product Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .product-main-image {
-            height: 500px;
-            object-fit: cover;
-            width: 100%;
-            background-color: #f8f9fa;
+        .dropdown-menu {
+            display: none;
+            transition: all 0.3s ease;
         }
-        .product-image-error {
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-            color: #6c757d;
-            border: 1px solid #dee2e6;
-            border-radius: 0.375rem;
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">
-                <i class="fas fa-tshirt me-2"></i>Tab On Fashion
-            </a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/products">Products</a>
-                <a class="nav-link" href="/cart">
-                    <i class="fas fa-shopping-cart me-1"></i>Cart
-                </a>
-                <a class="nav-link" href="/dashboard">Dashboard</a>
-            </div>
-        </div>
-    </nav>
+<body class="bg-gray-50">
+    
+	<div th:replace="~{nav/navbar :: navbar}"></div>
 
-    <div class="container mt-4">
-        <!-- Success/Error Messages -->
-        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle me-2"></i>
-            <span th:text="${successMessage}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        
-        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-triangle me-2"></i>
-            <span th:text="${errorMessage}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <!-- Product Details Section -->
+    <div class="pt-20 max-w-7xl mx-auto px-4 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/products" class="text-gray-600 hover:text-purple-600">Products</a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <span class="mx-2 text-gray-400">/</span>
+                        <a th:href="@{/products(category=${product.category})}" th:text="${product.category}" class="text-gray-600 hover:text-purple-600">Category</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <span class="mx-2 text-gray-400">/</span>
+                        <span class="text-gray-500" th:text="${product.name}">Product Name</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
 
-        <div class="row">
-            <!-- Product Image -->
-            <div class="col-md-6">
-                <div class="position-relative">
-                    <img th:if="${product.imageUrl != null and !product.imageUrl.isEmpty()}" 
-                         th:src="${product.imageUrl}" 
-                         class="img-fluid rounded product-main-image" 
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Product Images -->
+            <div class="w-full md:w-1/2">
+                <div class="mb-4">
+                    <img th:if="${product.imageUrl != null and !product.imageUrl.isEmpty()}"
+                         th:src="${product.imageUrl}"
+                         class="w-full rounded-lg object-cover" style="height: 500px;"
                          th:alt="${product.name}"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="product-image-error" style="display: none;">
-                        <div class="text-center">
-                            <i class="fas fa-image fa-4x mb-3"></i>
-                            <div class="h5">No Image Available</div>
-                            <div class="text-muted">Product image could not be loaded</div>
-                        </div>
+                    <div class="flex items-center justify-center w-full rounded-lg bg-gray-100 text-gray-400" style="height: 500px; display: none;">
+                        <i class="fas fa-image fa-4x mb-3"></i>
+                        <div class="h5">No Image Available</div>
                     </div>
-                    <img th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}" 
-                         src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=500&fit=crop" 
-                         class="img-fluid rounded product-main-image" 
+                    <img th:if="${product.imageUrl == null or product.imageUrl.isEmpty()}"
+                         src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=500&fit=crop"
+                         class="w-full rounded-lg object-cover" style="height: 500px;"
                          th:alt="${product.name}">
                 </div>
             </div>
-            
-            <!-- Product Details -->
-            <div class="col-md-6">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/products">Products</a></li>
-                        <li class="breadcrumb-item"><a th:href="@{/products(category=${product.category})}" th:text="${product.category}">Category</a></li>
-                        <li class="breadcrumb-item active" th:text="${product.name}">Product Name</li>
-                    </ol>
-                </nav>
-                
-                <h1 th:text="${product.name}">Product Name</h1>
-                <p class="text-muted lead" th:text="${product.description}">Product description goes here...</p>
-                
-                <!-- Price -->
-                <div class="mb-3">
-                    <h2 class="text-primary">$<span th:text="${product.price}">29.99</span></h2>
-                </div>
-                
-                <!-- Product Attributes -->
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <strong>Category:</strong> <span th:text="${product.category}">Tops</span>
-                    </div>
-                    <div class="col-sm-6">
-                        <strong>Color:</strong> <span th:text="${product.color}">Blue</span>
-                    </div>
-                    <div class="col-sm-6">
-                        <strong>Size:</strong> <span th:text="${product.size}">M</span>
-                    </div>
-                    <div class="col-sm-6">
-                        <strong>Material:</strong> <span th:text="${product.fabricType}">Cotton</span>
-                    </div>
-                </div>
-                
+
+            <!-- Product Info -->
+            <div class="w-full md:w-1/2">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4" th:text="${product.name}">Product Name</h1>
                 <!-- Sustainability Score -->
-                <div class="mb-3" th:if="${product.sustainabilityScore != null}">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-leaf text-success me-2"></i>
-                        <strong>Sustainability Score:</strong>
-                        <span class="ms-2 badge bg-success" th:text="${product.sustainabilityScore} + '/10'">8.5/10</span>
-                    </div>
-                    <small class="text-muted">This product meets our eco-friendly standards</small>
+                <div class="flex items-center mb-4" th:if="${product.sustainabilityScore != null}">
+                    <i class="fas fa-leaf text-green-600 mr-2"></i>
+                    <span class="font-semibold text-green-700" th:text="'Sustainability Score: ' + ${product.sustainabilityScore} + '/10'">Sustainability Score: 8.5/10</span>
                 </div>
-                
+                <p class="text-2xl text-gray-900 mb-6">$<span th:text="${product.price}">29.99</span></p>
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold mb-2">Description</h2>
+                    <p class="text-gray-600" th:text="${product.description}">Product description goes here...</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold mb-2">Attributes</h2>
+                    <div class="grid grid-cols-2 gap-2 text-gray-700">
+                        <div><strong>Category:</strong> <span th:text="${product.category}">Tops</span></div>
+                        <div><strong>Color:</strong> <span th:text="${product.color}">Blue</span></div>
+                        <div><strong>Size:</strong> <span th:text="${product.size}">M</span></div>
+                        <div><strong>Material:</strong> <span th:text="${product.fabricType}">Cotton</span></div>
+                    </div>
+                </div>
                 <!-- Stock Status -->
                 <div class="mb-3">
-                    <div th:if="${product.stockQuantity > 0}" class="text-success">
-                        <i class="fas fa-check-circle me-1"></i>
-                        <strong>In Stock</strong> (<span th:text="${product.stockQuantity}">10</span> available)
+                    <div th:if="${product.stockQuantity > 0}" class="text-green-600 font-semibold">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        In Stock (<span th:text="${product.stockQuantity}">10</span> available)
                     </div>
-                    <div th:if="${product.stockQuantity <= 0}" class="text-danger">
-                        <i class="fas fa-times-circle me-1"></i>
-                        <strong>Out of Stock</strong>
+                    <div th:if="${product.stockQuantity <= 0}" class="text-red-600 font-semibold">
+                        <i class="fas fa-times-circle mr-1"></i>
+                        Out of Stock
                     </div>
                 </div>
-                
                 <!-- Add to Cart Form -->
-                <form th:action="@{/cart/add}" method="post" class="mb-3">
+                <form th:action="@{/cart/add}" method="post" class="mb-6 flex items-center space-x-4">
                     <input type="hidden" name="productId" th:value="${product.id}">
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            <label for="quantity" class="form-label">Quantity:</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity" 
-                                   value="1" min="1" th:max="${product.stockQuantity}" style="width: 80px;">
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-label">&nbsp;</label>
-                            <button type="submit" class="btn btn-primary btn-lg d-block" 
-                                    th:disabled="${product.stockQuantity <= 0}">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
+                    <div>
+                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" th:max="${product.stockQuantity}"
+                               class="w-20 px-2 py-1 border rounded-lg focus:outline-none focus:border-purple-500">
                     </div>
-                </form>
-                
-                <!-- Additional Actions -->
-                <div class="d-flex gap-2">
-                    <button class="btn btn-outline-danger">
-                        <i class="fas fa-heart me-1"></i>Add to Wishlist
+                    <button type="submit"
+                            class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
+                            th:disabled="${product.stockQuantity <= 0}">
+                        <i class="fas fa-cart-plus mr-2"></i>Add to Cart
                     </button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-share me-1"></i>Share
+                </form>
+                <!-- Additional Actions -->
+                <div class="flex gap-2 mb-6">
+                    <button class="px-4 py-2 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50">
+                        <i class="far fa-heart mr-1"></i>Add to Wishlist
+                    </button>
+                    <button class="px-4 py-2 border border-gray-400 text-gray-600 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-share mr-1"></i>Share
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Product Details Tabs -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <ul class="nav nav-tabs" id="productTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" 
-                                data-bs-target="#description" type="button" role="tab">
-                            Description
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="specifications-tab" data-bs-toggle="tab" 
-                                data-bs-target="#specifications" type="button" role="tab">
-                            Specifications
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" 
-                                data-bs-target="#reviews" type="button" role="tab">
-                            Reviews
-                        </button>
-                    </li>
+        <div class="mt-12">
+            <div class="border-b">
+                <nav class="flex space-x-8">
+                    <button class="border-b-2 border-purple-600 py-4 px-1 text-purple-600">Description</button>
+                    <button class="py-4 px-1 text-gray-600 hover:text-purple-600">Specifications</button>
+                    <button class="py-4 px-1 text-gray-600 hover:text-purple-600">Reviews</button>
+                </nav>
+            </div>
+            <div class="py-8">
+                <h2 class="text-xl font-bold mb-4">Product Description</h2>
+                <p class="text-gray-600 mb-4" th:text="${product.description}">Detailed product description...</p>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li><strong>Category:</strong> <span th:text="${product.category}">Tops</span></li>
+                    <li><strong>Size:</strong> <span th:text="${product.size}">M</span></li>
+                    <li><strong>Color:</strong> <span th:text="${product.color}">Blue</span></li>
+                    <li><strong>Material:</strong> <span th:text="${product.fabricType}">Cotton</span></li>
+                    <li th:if="${product.sustainabilityScore != null}"><strong>Sustainability Score:</strong> <span th:text="${product.sustainabilityScore} + '/10'">8.5/10</span></li>
                 </ul>
-                
-                <div class="tab-content" id="productTabsContent">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel">
-                        <div class="p-3">
-                            <p th:text="${product.description}">Detailed product description...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tab-pane fade" id="specifications" role="tabpanel">
-                        <div class="p-3">
-                            <table class="table">
-                                <tr>
-                                    <td><strong>Category</strong></td>
-                                    <td th:text="${product.category}">Tops</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Size</strong></td>
-                                    <td th:text="${product.size}">M</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Color</strong></td>
-                                    <td th:text="${product.color}">Blue</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Material</strong></td>
-                                    <td th:text="${product.fabricType}">Cotton</td>
-                                </tr>
-                                <tr th:if="${product.sustainabilityScore != null}">
-                                    <td><strong>Sustainability Score</strong></td>
-                                    <td th:text="${product.sustainabilityScore} + '/10'">8.5/10</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="tab-pane fade" id="reviews" role="tabpanel">
-                        <div class="p-3">
-                            <p class="text-muted">Reviews feature coming soon...</p>
-                        </div>
+            </div>
+            <!-- Reviews Section (static placeholder, you can make dynamic as needed) -->
+            <div class="py-8 border-t">
+                <h2 class="text-xl font-bold mb-4">Customer Reviews</h2>
+                <p class="text-gray-600">Reviews feature coming soon...</p>
+            </div>
+        </div>
+        <!-- Related Products (static placeholder, you can make dynamic as needed) -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold mb-6">You May Also Like</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden" th:each="related : ${relatedProducts}">
+                    <img th:src="${related.imageUrl}" th:alt="${related.name}" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900" th:text="${related.name}">Related Product</h3>
+                        <p class="text-gray-600 mt-2" th:text="'$' + ${related.price}">$24.99</p>
+                        <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<div th:replace="~{nav/footer :: footer}"></div>
+	
 </body>
 </html>
