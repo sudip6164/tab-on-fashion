@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            transition: all 0.3s ease;
+        }
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-purple-600">Tab on Fashion</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">Home</a>
+                    <a href="shop.html" class="text-purple-600 hover:text-purple-800">Shop</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-purple-600">Blog</a>
+                    <a href="jobs.html" class="text-gray-600 hover:text-purple-600">Jobs</a>
+                    <a href="about.html" class="text-gray-600 hover:text-purple-600">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-purple-600">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-48 px-4 py-1 rounded-full border focus:outline-none focus:border-purple-500">
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-purple-600 relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </a>
+                    <div class="relative user-dropdown">
+                        <button class="text-gray-600 hover:text-purple-600 p-2">
+                            <i class="fas fa-user text-xl"></i>
+                        </button>
+                        <div class="dropdown-menu absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                            <a href="login.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-user-circle mr-2"></i>Profile
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-history mr-2"></i>Order History
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Section -->
+    <div class="pt-20 max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <div class="w-full md:w-1/4">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Filters</h2>
+                    
+                    <!-- Categories -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Categories</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Men's Clothing</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Women's Clothing</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Accessories</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Footwear</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Price Range</h3>
+                        <input type="range" min="0" max="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between mt-2">
+                            <span>$0</span>
+                            <span>$1000</span>
+                        </div>
+                    </div>
+
+                    <!-- Size -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Size</h3>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button class="p-2 border rounded hover:bg-purple-100">XS</button>
+                            <button class="p-2 border rounded hover:bg-purple-100">S</button>
+                            <button class="p-2 border rounded hover:bg-purple-100">M</button>
+                            <button class="p-2 border rounded hover:bg-purple-100">L</button>
+                            <button class="p-2 border rounded hover:bg-purple-100">XL</button>
+                            <button class="p-2 border rounded hover:bg-purple-100">XXL</button>
+                        </div>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Color</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="w-6 h-6 rounded-full bg-red-500"></button>
+                            <button class="w-6 h-6 rounded-full bg-blue-500"></button>
+                            <button class="w-6 h-6 rounded-full bg-green-500"></button>
+                            <button class="w-6 h-6 rounded-full bg-yellow-500"></button>
+                            <button class="w-6 h-6 rounded-full bg-purple-500"></button>
+                            <button class="w-6 h-6 rounded-full bg-black"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="w-full md:w-3/4">
+                <!-- Sort and View Options -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex space-x-4">
+                        <select class="border rounded-lg px-4 py-2">
+                            <option>Sort by: Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest First</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-gray-600">View:</span>
+                        <button class="p-2 hover:bg-gray-100 rounded">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="p-2 hover:bg-gray-100 rounded">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product Card 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <a href="product-details.html">
+                            <img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-4">
+                            <a href="product-details.html">
+                                <h3 class="text-lg font-semibold text-gray-900 hover:text-purple-600">Premium Cotton T-Shirt</h3>
+                            </a>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">(4.5)</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">$29.99</p>
+                            <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- More product cards with similar structure -->
+                    <!-- Product Card 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <a href="product-details.html">
+                            <img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-4">
+                            <a href="product-details.html">
+                                <h3 class="text-lg font-semibold text-gray-900 hover:text-purple-600">Designer Denim Jeans</h3>
+                            </a>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">(5.0)</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">$89.99</p>
+                            <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <a href="product-details.html">
+                            <img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+                        </a>
+                        <div class="p-4">
+                            <a href="product-details.html">
+                                <h3 class="text-lg font-semibold text-gray-900 hover:text-purple-600">Leather Crossbody Bag</h3>
+                            </a>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-gray-600">(4.0)</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">$129.99</p>
+                            <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8">
+                    <nav class="flex items-center space-x-2">
+                        <a href="#" class="px-3 py-2 rounded-lg border hover:bg-gray-100">Previous</a>
+                        <a href="#" class="px-3 py-2 rounded-lg border bg-purple-600 text-white">1</a>
+                        <a href="#" class="px-3 py-2 rounded-lg border hover:bg-gray-100">2</a>
+                        <a href="#" class="px-3 py-2 rounded-lg border hover:bg-gray-100">3</a>
+                        <a href="#" class="px-3 py-2 rounded-lg border hover:bg-gray-100">Next</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tab on Fashion</h3>
+                    <p class="text-gray-400">Your ultimate fashion destination</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white">Jobs</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@tabonfashion.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Fashion St, Style City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full">
+                        <button class="bg-purple-600 px-4 py-2 rounded-r-lg hover:bg-purple-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: 'Premium Cotton T-Shirt',
+                price: 29.99,
+                category: "Men's Clothing",
+                size: 'M',
+                color: 'black',
+                rating: 4.5,
+                image: 'https://placehold.co/300x300'
+            },
+            {
+                id: 2,
+                name: 'Designer Denim Jeans',
+                price: 89.99,
+                category: "Men's Clothing",
+                size: 'L',
+                color: 'blue',
+                rating: 5.0,
+                image: 'https://placehold.co/300x300'
+            },
+            {
+                id: 3,
+                name: 'Leather Crossbody Bag',
+                price: 129.99,
+                category: 'Accessories',
+                color: 'brown',
+                rating: 4.0,
+                image: 'https://placehold.co/300x300'
+            }
+        ];
+
+        // State management
+        let filters = {
+            categories: [],
+            priceRange: 1000,
+            sizes: [],
+            colors: []
+        };
+
+        let currentSort = 'featured';
+        let currentView = 'grid';
+
+        // Filter handlers
+        document.querySelectorAll('.form-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const category = e.target.nextElementSibling.textContent.trim();
+                if (e.target.checked) {
+                    filters.categories.push(category);
+                } else {
+                    filters.categories = filters.categories.filter(c => c !== category);
+                }
+                updateProducts();
+            });
+        });
+
+        // Price range handler
+        const priceRange = document.querySelector('input[type="range"]');
+        priceRange.addEventListener('input', (e) => {
+            filters.priceRange = parseInt(e.target.value);
+            document.querySelector('span:last-child').textContent = `$${filters.priceRange}`;
+            updateProducts();
+        });
+
+        // Size handlers
+        document.querySelectorAll('.grid-cols-4 button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.target.classList.toggle('bg-purple-100');
+                const size = e.target.textContent;
+                if (filters.sizes.includes(size)) {
+                    filters.sizes = filters.sizes.filter(s => s !== size);
+                } else {
+                    filters.sizes.push(size);
+                }
+                updateProducts();
+            });
+        });
+
+        // Color handlers
+        document.querySelectorAll('.flex-wrap button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.target.classList.toggle('ring-2');
+                e.target.classList.toggle('ring-purple-600');
+                const color = e.target.classList.contains('bg-red-500') ? 'red' :
+                             e.target.classList.contains('bg-blue-500') ? 'blue' :
+                             e.target.classList.contains('bg-green-500') ? 'green' :
+                             e.target.classList.contains('bg-yellow-500') ? 'yellow' :
+                             e.target.classList.contains('bg-purple-500') ? 'purple' :
+                             'black';
+                if (filters.colors.includes(color)) {
+                    filters.colors = filters.colors.filter(c => c !== color);
+                } else {
+                    filters.colors.push(color);
+                }
+                updateProducts();
+            });
+        });
+
+        // Sort handler
+        document.querySelector('select').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            updateProducts();
+        });
+
+        // View handlers
+        document.querySelectorAll('.flex.items-center.space-x-2 button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const isGrid = e.target.classList.contains('fa-th-large') || 
+                             e.target.parentElement.classList.contains('fa-th-large');
+                currentView = isGrid ? 'grid' : 'list';
+                updateView();
+            });
+        });
+
+        function updateProducts() {
+            let filteredProducts = products;
+
+            // Apply category filters
+            if (filters.categories.length > 0) {
+                filteredProducts = filteredProducts.filter(product => 
+                    filters.categories.includes(product.category)
+                );
+            }
+
+            // Apply price filter
+            filteredProducts = filteredProducts.filter(product => 
+                product.price <= filters.priceRange
+            );
+
+            // Apply size filters
+            if (filters.sizes.length > 0) {
+                filteredProducts = filteredProducts.filter(product => 
+                    filters.sizes.includes(product.size)
+                );
+            }
+
+            // Apply color filters
+            if (filters.colors.length > 0) {
+                filteredProducts = filteredProducts.filter(product => 
+                    filters.colors.includes(product.color)
+                );
+            }
+
+            // Apply sorting
+            switch(currentSort) {
+                case 'Price: Low to High':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'Price: High to Low':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'Newest First':
+                    filteredProducts.sort((a, b) => b.id - a.id);
+                    break;
+            }
+
+            renderProducts(filteredProducts);
+        }
+
+        function renderProducts(products) {
+            const productsContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
+            productsContainer.innerHTML = products.map(product => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="product-details.html">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                    </a>
+                    <div class="p-4">
+                        <a href="product-details.html">
+                            <h3 class="text-lg font-semibold text-gray-900 hover:text-purple-600">${product.name}</h3>
+                        </a>
+                        <div class="flex items-center mt-2">
+                            <div class="flex text-yellow-400">
+                                ${getStarRating(product.rating)}
+                            </div>
+                            <span class="ml-2 text-gray-600">(${product.rating})</span>
+                        </div>
+                        <p class="text-gray-600 mt-2">$${product.price}</p>
+                        <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getStarRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        function updateView() {
+            const productsContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
+            if (currentView === 'list') {
+                productsContainer.classList.remove('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+                productsContainer.classList.add('grid-cols-1');
+            } else {
+                productsContainer.classList.remove('grid-cols-1');
+                productsContainer.classList.add('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+            }
+        }
+
+        // Initial render
+        updateProducts();
+    </script>
+</body>
+</html> 
