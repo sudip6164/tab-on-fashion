@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Tab On Fashion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-tshirt me-2"></i>Tab On Fashion
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/products">Products</a>
+                <a class="nav-link" href="/cart">Cart</a>
+                <a class="nav-link" href="/orders">My Orders</a>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/orders">My Orders</a></li>
+                <li class="breadcrumb-item active">Order #<span th:text="${order.id}">12345</span></li>
+            </ol>
+        </nav>
+
+        <!-- Order Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4 class="mb-0">
+                                    <i class="fas fa-receipt me-2"></i>Order #<span th:text="${order.id}">12345</span>
+                                </h4>
+                                <small class="text-muted">
+                                    Placed on <span th:text="${#temporals.format(order.orderDate, 'MMMM dd, yyyy HH:mm')}">January 15, 2025 10:30</span>
+                                </small>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <span class="badge fs-6" 
+                                      th:classappend="${order.status.name() == 'PENDING' ? 'bg-warning text-dark' : 
+                                                      order.status.name() == 'SHIPPED' ? 'bg-info' : 
+                                                      order.status.name() == 'DELIVERED' ? 'bg-success' : 'bg-danger'}"
+                                      th:text="${order.status}">PENDING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Order Items -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-box me-2"></i>Order Items (<span th:text="${order.totalItems}">2</span>)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div th:each="item : ${order.orderItems}" class="row align-items-center border-bottom py-3">
+                            <div class="col-md-2">
+                                <img th:src="${item.product.imageUrl != null ? item.product.imageUrl : '/placeholder.svg?height=80&width=80'}" 
+                                     class="img-fluid rounded" alt="Product Image" style="max-height: 80px;">
+                            </div>
+                            <div class="col-md-5">
+                                <h6 class="mb-1" th:text="${item.product.name}">Product Name</h6>
+                                <small class="text-muted" th:text="${item.product.description}">Product description</small><br>
+                                <small class="text-muted">
+                                    <span class="badge bg-secondary me-1" th:text="${item.product.category}">Category</span>
+                                    <span class="badge bg-info me-1" th:text="${item.product.color}">Color</span>
+                                    <span class="badge bg-warning text-dark" th:text="${item.product.size}">Size</span>
+                                </small>
+                                <!-- Sustainability Score -->
+                                <div th:if="${item.product.sustainabilityScore != null}" class="mt-1">
+                                    <small class="text-success">
+                                        <i class="fas fa-leaf me-1"></i>
+                                        Eco Score: <span th:text="${item.product.sustainabilityScore}">8.5</span>/10
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <strong>$<span th:text="${item.unitPrice}">29.99</span></strong>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <span class="badge bg-light text-dark">×<span th:text="${item.quantity}">2</span></span>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <strong class="text-primary">$<span th:text="${item.totalPrice}">59.98</span></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <!-- Order Summary Card -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>$<span th:text="${order.totalAmount}">59.98</span></span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping:</span>
+                            <span class="text-success">FREE</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tax:</span>
+                            <span>$0.00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <strong>Total:</strong>
+                            <strong class="text-primary">$<span th:text="${order.totalAmount}">59.98</span></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Payment</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>Payment Status:</strong><br>
+                            <span class="badge" 
+                                  th:classappend="${order.paymentStatus.name() == 'PENDING' ? 'bg-warning text-dark' : 
+                                                  order.paymentStatus.name() == 'PAID' ? 'bg-success' : 'bg-danger'}"
+                                  th:text="${order.paymentStatus}">PENDING</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Payment Method:</strong><br>
+                            <small class="text-muted">Credit Card ending in ****3456</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Information -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Shipping</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>Shipping Address:</strong><br>
+                            <address class="mb-0">
+                                <span th:text="${order.shippingAddress}">123 Main Street, City, State 12345</span>
+                            </address>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Shipping Method:</strong><br>
+                            <small class="text-muted">Standard Shipping (5-7 business days)</small>
+                        </div>
+                        <div th:if="${order.status.name() == 'SHIPPED' or order.status.name() == 'DELIVERED'}">
+                            <strong>Tracking Number:</strong><br>
+                            <code>TF<span th:text="${order.id}">12345</span>2025</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Timeline -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-history me-2"></i>Order Timeline</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-success"></div>
+                                <div class="timeline-content">
+                                    <h6 class="timeline-title">Order Placed</h6>
+                                    <p class="timeline-description text-muted">
+                                        Your order has been successfully placed.
+                                    </p>
+                                    <small class="text-muted" th:text="${#temporals.format(order.orderDate, 'MMMM dd, yyyy HH:mm')}">January 15, 2025 10:30</small>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item" th:if="${order.paymentStatus.name() == 'PAID'}">
+                                <div class="timeline-marker bg-info"></div>
+                                <div class="timeline-content">
+                                    <h6 class="timeline-title">Payment Confirmed</h6>
+                                    <p class="timeline-description text-muted">
+                                        Payment has been successfully processed.
+                                    </p>
+                                    <small class="text-muted">Payment confirmed</small>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item" th:if="${order.status.name() == 'SHIPPED' or order.status.name() == 'DELIVERED'}">
+                                <div class="timeline-marker bg-warning"></div>
+                                <div class="timeline-content">
+                                    <h6 class="timeline-title">Order Shipped</h6>
+                                    <p class="timeline-description text-muted">
+                                        Your order has been shipped and is on its way.
+                                    </p>
+                                    <small class="text-muted">Shipped</small>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item" th:if="${order.status.name() == 'DELIVERED'}">
+                                <div class="timeline-marker bg-success"></div>
+                                <div class="timeline-content">
+                                    <h6 class="timeline-title">Order Delivered</h6>
+                                    <p class="timeline-description text-muted">
+                                        Your order has been successfully delivered.
+                                    </p>
+                                    <small class="text-muted">Delivered</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="d-flex gap-2">
+                    <a href="/orders" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Orders
+                    </a>
+                    <button class="btn btn-outline-primary" onclick="window.print()">
+                        <i class="fas fa-print me-1"></i>Print Order
+                    </button>
+                    <a href="/products" class="btn btn-primary">
+                        <i class="fas fa-shopping-bag me-1"></i>Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dee2e6;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -22px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #dee2e6;
+        }
+        
+        .timeline-title {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .timeline-description {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

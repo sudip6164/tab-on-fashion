@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management - Tab On Fashion Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/admin/dashboard">
+                <i class="fas fa-tshirt me-2"></i>Tab On Fashion - Admin
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                <a class="nav-link" href="/auth/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active">Product Management</li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-tshirt me-2"></i>Product Management</h2>
+            <a href="/admin/products/create" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Add New Product
+            </a>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <span th:text="${errorMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Products Table -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Eco Score</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.id}">1</td>
+                                <td>
+                                    <img th:src="${product.imageUrl != null ? product.imageUrl : '/placeholder.svg?height=50&width=50'}" 
+                                         class="rounded" style="width: 50px; height: 50px; object-fit: cover;" alt="Product">
+                                </td>
+                                <td th:text="${product.name}">Product Name</td>
+                                <td th:text="${product.category}">Category</td>
+                                <td>$<span th:text="${product.price}">29.99</span></td>
+                                <td>
+                                    <span class="badge" 
+                                          th:classappend="${product.stockQuantity > 0 ? 'bg-success' : 'bg-danger'}"
+                                          th:text="${product.stockQuantity}">10</span>
+                                </td>
+                                <td>
+                                    <span th:if="${product.sustainabilityScore != null}" 
+                                          class="badge bg-success" 
+                                          th:text="${product.sustainabilityScore} + '/10'">8.5/10</span>
+                                    <span th:if="${product.sustainabilityScore == null}" class="text-muted">N/A</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a th:href="@{/admin/products/{id}(id=${product.id})}" class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a th:href="@{/admin/products/{id}/edit(id=${product.id})}" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                onclick="confirmDelete([[${product.id}]], '[[${product.name}]]')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <nav th:if="${productPage.totalPages > 1}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${productPage.first} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/products(page=0)}">First</a>
+                        </li>
+                        <li class="page-item" th:classappend="${productPage.first} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/products(page=${productPage.number - 1})}">Previous</a>
+                        </li>
+                        <li class="page-item" th:classappend="${productPage.last} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/products(page=${productPage.number + 1})}">Next</a>
+                        </li>
+                        <li class="page-item" th:classappend="${productPage.last} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/products(page=${productPage.totalPages - 1})}">Last</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete product <strong id="deleteProductName"></strong>?</p>
+                    <p class="text-danger">This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteForm" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmDelete(productId, productName) {
+            document.getElementById('deleteProductName').textContent = productName;
+            document.getElementById('deleteForm').action = '/admin/products/' + productId + '/delete';
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        }
+    </script>
+</body>
+</html>
