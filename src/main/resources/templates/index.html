@@ -1,172 +1,217 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tab On Fashion - Sustainable Fashion Platform</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 100px 0;
-        }
-        .feature-card {
-            transition: transform 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tab on Fashion - Your Style Destination</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<style>
+		.dropdown-menu {
+			display: none;
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+		}
+
+		.user-dropdown:hover .dropdown-menu {
+			display: block;
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.dropdown-menu::before {
+			content: '';
+			position: absolute;
+			top: -10px;
+			right: 10px;
+			width: 100%;
+			height: 10px;
+			background: transparent;
+		}
+	</style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">
-                <i class="fas fa-tshirt me-2"></i>Tab On Fashion
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/shop">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
-                    </li>
-                    <li class="nav-item" th:if="${user == null}">
-                        <a class="nav-link" href="/auth/login">Login</a>
-                    </li>
-                    <li class="nav-item" th:if="${user == null}">
-                        <a class="nav-link" href="/auth/signup">Sign Up</a>
-                    </li>
-                    <li class="nav-item" th:if="${user != null}">
-                        <a class="nav-link" href="/cart">
-                            <i class="fas fa-shopping-cart me-1"></i>Cart
-                            <span th:if="${cartItemCount != null and cartItemCount > 0}" 
-                                  class="badge bg-danger rounded-pill ms-1" th:text="${cartItemCount}">0</span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown" th:if="${user != null}">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i><span th:text="${user.username}">User</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-4">Sustainable Fashion for Everyone</h1>
-                    <p class="lead mb-4">Discover eco-friendly fashion that matches your style. Shop consciously with personalized recommendations.</p>
-                    <div class="d-flex gap-3 justify-content-center">
-                        <a href="/shop" class="btn btn-light btn-lg px-4">
-                            <i class="fas fa-shopping-bag me-2"></i>Shop Now
-                        </a>
-                        <a href="/about" class="btn btn-outline-light btn-lg px-4">Learn More</a>
+<body class="bg-gray-50">
+	
+	<div th:replace="~{nav/navbar :: navbar}"></div>
+
+	<!-- Hero Section -->
+	<div class="pt-16">
+		<div class="relative bg-purple-100 h-[500px]">
+			<div class="max-w-7xl mx-auto px-4 py-24">
+				<div class="text-center">
+					<h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to Tab on Fashion</h1>
+					<p class="text-xl text-gray-600 mb-8">Discover the latest trends in fashion</p>
+					<a href="/shop" class="bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700">Shop
+						Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Featured Products -->
+	<div class="max-w-7xl mx-auto px-4 py-12">
+		<div class="flex justify-between items-center mb-8">
+			<h2 class="text-2xl font-bold text-gray-900">Featured Products</h2>
+			<div class="flex space-x-4">
+				<select class="border rounded-lg px-4 py-2">
+					<option>Sort by</option>
+					<option>Price: Low to High</option>
+					<option>Price: High to Low</option>
+					<option>Latest</option>
+				</select>
+				<select class="border rounded-lg px-4 py-2">
+					<option>Filter by</option>
+					<option>Men</option>
+					<option>Women</option>
+					<option>Accessories</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Product Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+			<!-- Product Card 1 -->
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+				<div class="p-4">
+					<h3 class="text-lg font-semibold text-gray-900">Stylish T-Shirt</h3>
+					<p class="text-gray-600 mt-2">$29.99</p>
+					<button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to
+						Cart</button>
+				</div>
+			</div>
+
+			<!-- Product Card 2 -->
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+				<div class="p-4">
+					<h3 class="text-lg font-semibold text-gray-900">Designer Jeans</h3>
+					<p class="text-gray-600 mt-2">$79.99</p>
+					<button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to
+						Cart</button>
+				</div>
+			</div>
+
+			<!-- Product Card 3 -->
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+				<div class="p-4">
+					<h3 class="text-lg font-semibold text-gray-900">Casual Sneakers</h3>
+					<p class="text-gray-600 mt-2">$89.99</p>
+					<button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to
+						Cart</button>
+				</div>
+			</div>
+
+			<!-- Product Card 4 -->
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img src="https://placehold.co/300x300" alt="Product" class="w-full h-64 object-cover">
+				<div class="p-4">
+					<h3 class="text-lg font-semibold text-gray-900">Summer Dress</h3>
+					<p class="text-gray-600 mt-2">$59.99</p>
+					<button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to
+						Cart</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="~{nav/footer :: footer}"></div>
+
+	<script>
+		// Sample featured products data
+		const featuredProducts = [
+			{
+				id: 1,
+				name: 'Stylish T-Shirt',
+				price: 29.99,
+				category: "Men",
+				image: 'https://placehold.co/300x300'
+			},
+			{
+				id: 2,
+				name: 'Designer Jeans',
+				price: 79.99,
+				category: "Men",
+				image: 'https://placehold.co/300x300'
+			},
+			{
+				id: 3,
+				name: 'Casual Sneakers',
+				price: 89.99,
+				category: "Accessories",
+				image: 'https://placehold.co/300x300'
+			},
+			{
+				id: 4,
+				name: 'Summer Dress',
+				price: 59.99,
+				category: "Women",
+				image: 'https://placehold.co/300x300'
+			}
+		];
+
+		let currentSort = 'Sort by';
+		let currentFilter = 'Filter by';
+
+		// Sort handler
+		document.querySelector('select:first-of-type').addEventListener('change', (e) => {
+			currentSort = e.target.value;
+			updateProducts();
+		});
+
+		// Filter handler
+		document.querySelector('select:last-of-type').addEventListener('change', (e) => {
+			currentFilter = e.target.value;
+			updateProducts();
+		});
+
+		function updateProducts() {
+			let filteredProducts = [...featuredProducts];
+
+			// Apply category filter
+			if (currentFilter !== 'Filter by') {
+				filteredProducts = filteredProducts.filter(product =>
+					product.category === currentFilter
+				);
+			}
+
+			// Apply sorting
+			switch (currentSort) {
+				case 'Price: Low to High':
+					filteredProducts.sort((a, b) => a.price - b.price);
+					break;
+				case 'Price: High to Low':
+					filteredProducts.sort((a, b) => b.price - a.price);
+					break;
+				case 'Latest':
+					filteredProducts.sort((a, b) => b.id - a.id);
+					break;
+			}
+
+			renderProducts(filteredProducts);
+		}
+
+		function renderProducts(products) {
+			const productsContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4');
+			productsContainer.innerHTML = products.map(product => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900">${product.name}</h3>
+                        <p class="text-gray-600 mt-2">$${product.price}</p>
+                        <button class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Add to Cart</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            `).join('');
+		}
 
-    <!-- Features Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row text-center mb-5">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="display-5 fw-bold">Why Choose Tab On Fashion?</h2>
-                    <p class="lead text-muted">Experience the future of sustainable fashion shopping</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card feature-card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-leaf text-primary fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">Eco-Friendly</h4>
-                            <p class="text-muted">Discover sustainable fashion from ethical brands committed to environmental responsibility.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card feature-card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-magic text-success fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">Personalized</h4>
-                            <p class="text-muted">Get tailored recommendations based on your style preferences and shopping behavior.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card feature-card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-shield-alt text-info fa-2x"></i>
-                            </div>
-                            <h4 class="fw-bold">Secure</h4>
-                            <p class="text-muted">Shop with confidence using our secure payment system and data protection.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="bg-light py-5" th:if="${user == null}">
-        <div class="container text-center">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h3 class="fw-bold mb-3">Ready to Start Your Sustainable Fashion Journey?</h3>
-                    <p class="text-muted mb-4">Join thousands of conscious shoppers who are making a difference.</p>
-                    <a href="/auth/signup" class="btn btn-primary btn-lg px-4">
-                        <i class="fas fa-user-plus me-2"></i>Sign Up Now
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="fw-bold">
-                        <i class="fas fa-tshirt me-2"></i>Tab On Fashion
-                    </h5>
-                    <p class="text-muted">Sustainable fashion for a better tomorrow.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-0">&copy; 2025 Tab On Fashion. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		// Initial render
+		updateProducts();
+	</script>
 </body>
+
 </html>
