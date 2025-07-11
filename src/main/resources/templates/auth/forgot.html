@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-purple-600">Tab on Fashion</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">Home</a>
+                    <a href="shop.html" class="text-gray-600 hover:text-purple-600">Shop</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-purple-600">Blog</a>
+                    <a href="jobs.html" class="text-gray-600 hover:text-purple-600">Jobs</a>
+                    <a href="about.html" class="text-gray-600 hover:text-purple-600">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-purple-600">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-48 px-4 py-1 rounded-full border focus:outline-none focus:border-purple-500">
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-purple-600 relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </a>
+                    <div class="relative group">
+                        <button class="text-gray-600 hover:text-purple-600">
+                            <i class="fas fa-user text-xl"></i>
+                        </button>
+                        <div class="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block z-50">
+                            <a href="login.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-user-circle mr-2"></i>Profile
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-history mr-2"></i>Order History
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Forgot Password Section -->
+    <div class="pt-16">
+        <div class="max-w-7xl mx-auto px-4 py-24">
+            <div class="max-w-md mx-auto">
+                <!-- Step 1: Email Entry -->
+                <div id="emailStep" class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Forgot Password</h2>
+                    <p class="text-gray-600 mb-6">Enter your email address and we'll send you an OTP to reset your password.</p>
+                    <form>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
+                            <input type="email" id="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter your email">
+                        </div>
+                        <button type="button" onclick="showOTPStep()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Send OTP</button>
+                        <div class="mt-4 text-center">
+                            <a href="login.html" class="text-purple-600 hover:text-purple-800">Back to Login</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 2: OTP Verification -->
+                <div id="otpStep" class="bg-white rounded-lg shadow-lg p-8 hidden">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Enter OTP</h2>
+                    <p class="text-gray-600 mb-6">We've sent a verification code to your email. Please enter it below.</p>
+                    <form>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">OTP Code</label>
+                            <div class="flex justify-between gap-2">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                                <input type="text" maxlength="1" class="w-12 h-12 text-center border rounded-lg focus:outline-none focus:border-purple-500 text-xl">
+                            </div>
+                        </div>
+                        <button type="button" onclick="showNewPasswordStep()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Verify OTP</button>
+                        <div class="mt-4 text-center">
+                            <button type="button" onclick="resendOTP()" class="text-purple-600 hover:text-purple-800">Resend OTP</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 3: New Password -->
+                <div id="newPasswordStep" class="bg-white rounded-lg shadow-lg p-8 hidden">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Set New Password</h2>
+                    <p class="text-gray-600 mb-6">Please enter your new password.</p>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
+                            <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter new password">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Confirm New Password</label>
+                            <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Confirm new password">
+                        </div>
+                        <button type="button" onclick="resetPassword()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Reset Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tab on Fashion</h3>
+                    <p class="text-gray-400">Your ultimate fashion destination</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white">Jobs</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@tabonfashion.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Fashion St, Style City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full">
+                        <button class="bg-purple-600 px-4 py-2 rounded-r-lg hover:bg-purple-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showOTPStep() {
+            document.getElementById('emailStep').classList.add('hidden');
+            document.getElementById('otpStep').classList.remove('hidden');
+        }
+
+        function showNewPasswordStep() {
+            document.getElementById('otpStep').classList.add('hidden');
+            document.getElementById('newPasswordStep').classList.remove('hidden');
+        }
+
+        function resendOTP() {
+            // Add your resend OTP logic here
+            alert('OTP resent to your email');
+        }
+
+        function resetPassword() {
+            // Add your password reset logic here
+            alert('Password reset successful');
+            window.location.href = 'login.html';
+        }
+
+        // Auto-focus next OTP input
+        const otpInputs = document.querySelectorAll('#otpStep input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            width: 100%;
+            height: 10px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-purple-600">Tab on Fashion</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">Home</a>
+                    <a href="shop.html" class="text-gray-600 hover:text-purple-600">Shop</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-purple-600">Blog</a>
+                    <a href="jobs.html" class="text-purple-600">Jobs</a>
+                    <a href="about.html" class="text-gray-600 hover:text-purple-600">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-purple-600">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-48 px-4 py-1 rounded-full border focus:outline-none focus:border-purple-500">
+                    </div>
+                    <a href="cart.html" class="text-gray-600 hover:text-purple-600 relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+                    </a>
+                    <div class="relative user-dropdown">
+                        <button class="text-gray-600 hover:text-purple-600 p-2">
+                            <i class="fas fa-user text-xl"></i>
+                        </button>
+                        <div class="dropdown-menu absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                            <a href="login.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-user-circle mr-2"></i>Profile
+                            </a>
+                            <a href="order-history.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-history mr-2"></i>Order History
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Job Search Section -->
+    <div class="pt-20 max-w-7xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">Find Your Dream Job</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <input type="text" placeholder="Job title or keyword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <input type="text" placeholder="Location" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <button class="w-full bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">
+                        Search Jobs
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Job Listings -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Filters -->
+            <div class="bg-white rounded-lg shadow-md p-6 h-fit">
+                <h2 class="font-semibold text-lg mb-4">Filters</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-medium mb-2">Job Type</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Full-time</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Part-time</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Contract</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Internship</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">Experience Level</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Entry Level</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Mid Level</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Senior Level</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">Department</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Design</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Marketing</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Sales</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-purple-600">
+                                <span class="ml-2">Technology</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Listings -->
+            <div class="md:col-span-3 space-y-6">
+                <!-- Job Card -->
+                <a href="job-details.html" class="block bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Senior Fashion Designer</h2>
+                            <p class="text-purple-600 mb-2">Tab on Fashion - New York, NY</p>
+                            <div class="flex items-center text-gray-600 text-sm space-x-4">
+                                <span><i class="fas fa-briefcase mr-1"></i> Full-time</span>
+                                <span><i class="fas fa-layer-group mr-1"></i> Senior Level</span>
+                                <span><i class="fas fa-dollar-sign mr-1"></i> $80k - $120k</span>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">2 days ago</span>
+                    </div>
+                </a>
+
+                <!-- Job Card -->
+                <a href="job-details.html" class="block bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Marketing Manager</h2>
+                            <p class="text-purple-600 mb-2">Tab on Fashion - Los Angeles, CA</p>
+                            <div class="flex items-center text-gray-600 text-sm space-x-4">
+                                <span><i class="fas fa-briefcase mr-1"></i> Full-time</span>
+                                <span><i class="fas fa-layer-group mr-1"></i> Mid Level</span>
+                                <span><i class="fas fa-dollar-sign mr-1"></i> $60k - $90k</span>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">3 days ago</span>
+                    </div>
+                </a>
+
+                <!-- Job Card -->
+                <a href="job-details.html" class="block bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900 mb-2">Fashion Photographer</h2>
+                            <p class="text-purple-600 mb-2">Tab on Fashion - Miami, FL</p>
+                            <div class="flex items-center text-gray-600 text-sm space-x-4">
+                                <span><i class="fas fa-briefcase mr-1"></i> Contract</span>
+                                <span><i class="fas fa-layer-group mr-1"></i> Mid Level</span>
+                                <span><i class="fas fa-dollar-sign mr-1"></i> $40k - $60k</span>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">1 week ago</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tab on Fashion</h3>
+                    <p class="text-gray-400">Your ultimate fashion destination</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white">Jobs</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@tabonfashion.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Fashion St, Style City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full">
+                        <button class="bg-purple-600 px-4 py-2 rounded-r-lg hover:bg-purple-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

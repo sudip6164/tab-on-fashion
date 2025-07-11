@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs Management - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="bg-gray-800 text-white w-64 min-h-screen px-4 py-8">
+            <div class="flex items-center justify-center mb-8">
+                <span class="text-2xl font-bold">Admin Panel</span>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="dashboard.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="products.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+                <a href="orders.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Orders</span>
+                </a>
+                <a href="users.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+                <a href="blog-posts.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog Posts</span>
+                </a>
+                <a href="jobs.html" class="flex items-center space-x-2 bg-gray-900 text-white p-2 rounded-lg">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Jobs</span>
+                </a>
+                <a href="categories.html" class="flex items-center space-x-2 hover:bg-gray-900 p-2 rounded-lg">
+                    <i class="fas fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+                <a href="#" onclick="handleLogout()" class="flex items-center space-x-2 text-red-500 hover:text-red-400 p-2 rounded-lg">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto">
+            <!-- Top Navigation -->
+            <nav class="bg-white px-6 py-3 flex justify-between items-center shadow-sm">
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold">Jobs Management</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-gray-600">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-gray-500 hover:text-gray-600">
+                            <img src="https://placehold.co/32x32" alt="Admin" class="w-8 h-8 rounded-full">
+                            <span>Admin User</span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Jobs Content -->
+            <div class="p-6">
+                <!-- Actions Bar -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Search jobs..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                        <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500">
+                            <option value="">All Departments</option>
+                            <option value="design">Design</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="sales">Sales</option>
+                            <option value="technology">Technology</option>
+                        </select>
+                        <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="closed">Closed</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700" onclick="showJobEditor()">
+                        <i class="fas fa-plus mr-2"></i>Post New Job
+                    </button>
+                </div>
+
+                <!-- Jobs Table -->
+                <div class="bg-white rounded-lg shadow-sm mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Position</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Posted Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Applications</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Senior Fashion Designer</div>
+                                        <div class="text-sm text-gray-500">Full Time</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold text-purple-800 bg-purple-100 rounded-full">
+                                            Design
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">New York, NY</div>
+                                        <div class="text-sm text-gray-500">On-site</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">Mar 15, 2024</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <button class="text-purple-600 hover:text-purple-800">
+                                            12 Applications
+                                        </button>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-800" onclick="showJobEditor()">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Add more job rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 flex items-center justify-between border-t">
+                        <div class="text-sm text-gray-500">
+                            Showing 1 to 10 of 20 entries
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 border rounded hover:bg-gray-50">Previous</button>
+                            <button class="px-3 py-1 border rounded bg-purple-600 text-white">1</button>
+                            <button class="px-3 py-1 border rounded hover:bg-gray-50">2</button>
+                            <button class="px-3 py-1 border rounded hover:bg-gray-50">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Overview -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-lg font-semibold mb-4">Recent Applications</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/40x40" alt="Applicant" class="w-10 h-10 rounded-full">
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                    <div class="text-sm text-gray-500">Senior Fashion Designer</div>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-500">Applied 2 hours ago</div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 text-green-600 hover:text-green-800">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="px-3 py-1 text-red-600 hover:text-red-800">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="px-3 py-1 text-blue-600 hover:text-blue-800">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Add more application items as needed -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Job Editor Modal -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 hidden overflow-y-auto" id="jobEditorModal">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl my-8">
+                    <div class="p-6 border-b flex justify-between items-center">
+                        <h2 class="text-xl font-semibold">Post New Job</h2>
+                        <button class="text-gray-500 hover:text-gray-600" onclick="closeJobEditor()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <form>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Job Title</label>
+                                    <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter job title">
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                            <option value="">Select Department</option>
+                                            <option value="design">Design</option>
+                                            <option value="marketing">Marketing</option>
+                                            <option value="sales">Sales</option>
+                                            <option value="technology">Technology</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Employment Type</label>
+                                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                            <option value="full-time">Full Time</option>
+                                            <option value="part-time">Part Time</option>
+                                            <option value="contract">Contract</option>
+                                            <option value="internship">Internship</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                                        <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter location">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Work Type</label>
+                                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                            <option value="on-site">On-site</option>
+                                            <option value="remote">Remote</option>
+                                            <option value="hybrid">Hybrid</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Job Description</label>
+                                    <textarea rows="6" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter job description"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Requirements</label>
+                                    <textarea rows="4" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter job requirements"></textarea>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Salary Range</label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="number" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Min">
+                                            <span>-</span>
+                                            <input type="number" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Max">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
+                                        <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                            <option value="entry">Entry Level</option>
+                                            <option value="mid">Mid Level</option>
+                                            <option value="senior">Senior Level</option>
+                                            <option value="executive">Executive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Application Deadline</label>
+                                    <input type="date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="p-6 border-t flex justify-end space-x-3">
+                        <button class="px-4 py-2 border rounded-lg hover:bg-gray-50" onclick="closeJobEditor()">Cancel</button>
+                        <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Post Job</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showJobEditor() {
+            document.getElementById('jobEditorModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeJobEditor() {
+            document.getElementById('jobEditorModal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function handleLogout() {
+            if(confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-purple-600">Tab on Fashion</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">Home</a>
+                    <a href="shop.html" class="text-gray-600 hover:text-purple-600">Shop</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-purple-600">Blog</a>
+                    <a href="jobs.html" class="text-gray-600 hover:text-purple-600">Jobs</a>
+                    <a href="about.html" class="text-gray-600 hover:text-purple-600">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-purple-600">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-48 px-4 py-1 rounded-full border focus:outline-none focus:border-purple-500">
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-purple-600 relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </a>
+                    <div class="relative group">
+                        <button class="text-gray-600 hover:text-purple-600">
+                            <i class="fas fa-user text-xl"></i>
+                        </button>
+                        <div class="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block z-50">
+                            <a href="login.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-user-circle mr-2"></i>Profile
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-history mr-2"></i>Order History
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="pt-20 max-w-7xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-8">My Profile</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Profile Image Section -->
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="w-40 h-40 mx-auto relative">
+                            <img src="https://placehold.co/200x200" alt="Profile" class="w-full h-full rounded-full object-cover">
+                            <label for="profile-image" class="absolute bottom-0 right-0 bg-purple-600 text-white rounded-full p-2 cursor-pointer hover:bg-purple-700">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="profile-image" class="hidden" accept="image/*">
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-900">John Doe</h2>
+                    <p class="text-gray-600">Member since 2024</p>
+                </div>
+
+                <!-- Personal Details Section -->
+                <div class="md:col-span-2">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Personal Details</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
+                                    <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" value="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                                    <input type="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" value="john@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Age</label>
+                                    <input type="number" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" value="25">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Height (cm)</label>
+                                    <input type="number" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" value="175">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
+                                    <input type="tel" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" value="+1234567890">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+                                    <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Clothing Preferences</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-purple-600" checked>
+                                        <span class="ml-2">Casual</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-purple-600">
+                                        <span class="ml-2">Formal</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-purple-600" checked>
+                                        <span class="ml-2">Sporty</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-purple-600">
+                                        <span class="ml-2">Vintage</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="mt-6 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Change Password Section -->
+                    <div class="mt-8 bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Change Password</h3>
+                        <form>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Current Password</label>
+                                    <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
+                                    <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Confirm New Password</label>
+                                    <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                </div>
+                            </div>
+                            <button type="submit" class="mt-6 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tab on Fashion</h3>
+                    <p class="text-gray-400">Your ultimate fashion destination</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white">Jobs</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@tabonfashion.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Fashion St, Style City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full">
+                        <button class="bg-purple-600 px-4 py-2 rounded-r-lg hover:bg-purple-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

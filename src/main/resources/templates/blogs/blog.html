@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Feed - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            width: 100%;
+            height: 10px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-purple-600">Tab on Fashion</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">Home</a>
+                    <a href="shop.html" class="text-gray-600 hover:text-purple-600">Shop</a>
+                    <a href="blog.html" class="text-purple-600">Blog</a>
+                    <a href="about.html" class="text-gray-600 hover:text-purple-600">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-purple-600">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="w-48 px-4 py-1 rounded-full border focus:outline-none focus:border-purple-500">
+                    </div>
+                    <a href="cart.html" class="text-gray-600 hover:text-purple-600 relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+                    </a>
+                    <div class="relative user-dropdown">
+                        <button class="text-gray-600 hover:text-purple-600 p-2">
+                            <i class="fas fa-user text-xl"></i>
+                        </button>
+                        <div class="dropdown-menu absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                            <a href="login.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-user-circle mr-2"></i>Profile
+                            </a>
+                            <a href="order-history.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-history mr-2"></i>Order History
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-50 hover:text-purple-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Feed Section -->
+    <div class="pt-20 max-w-4xl mx-auto px-4 py-8">
+        <!-- Create Post -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-start space-x-4">
+                <img src="https://placehold.co/50x50" alt="User Avatar" class="w-12 h-12 rounded-full">
+                <div class="flex-1">
+                    <textarea rows="3" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="What's on your mind?"></textarea>
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="flex space-x-4">
+                            <button class="text-gray-600 hover:text-purple-600">
+                                <i class="fas fa-image mr-2"></i>Photo
+                            </button>
+                            <button class="text-gray-600 hover:text-purple-600">
+                                <i class="fas fa-link mr-2"></i>Link
+                            </button>
+                            <button class="text-gray-600 hover:text-purple-600">
+                                <i class="fas fa-hashtag mr-2"></i>Tag
+                            </button>
+                        </div>
+                        <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Filters -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex space-x-4">
+                <button class="text-purple-600 font-semibold">Latest</button>
+                <button class="text-gray-600 hover:text-purple-600">Popular</button>
+                <button class="text-gray-600 hover:text-purple-600">Following</button>
+            </div>
+            <select class="border rounded-lg px-4 py-2">
+                <option>All Categories</option>
+                <option>Fashion Tips</option>
+                <option>Style Guide</option>
+                <option>Trends</option>
+                <option>Reviews</option>
+            </select>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="space-y-6">
+            <!-- Post 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <img src="https://placehold.co/50x50" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    <div class="ml-3">
+                        <h3 class="font-semibold text-gray-900">Emily Fashion</h3>
+                        <p class="text-sm text-gray-600">2 hours ago</p>
+                    </div>
+                </div>
+                <p class="text-gray-800 mb-4">Just got my hands on the new summer collection! The fabrics are amazing and the designs are absolutely stunning. Here's a sneak peek! 👗✨ #FashionLover #SummerStyle</p>
+                <img src="https://placehold.co/600x400" alt="Post Image" class="w-full rounded-lg mb-4">
+                <div class="flex items-center justify-between border-t border-b py-3">
+                    <div class="flex space-x-6">
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-heart mr-2"></i>
+                            <span>245 Likes</span>
+                        </button>
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-comment mr-2"></i>
+                            <span>38 Comments</span>
+                        </button>
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-share-square mr-2"></i>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    <button class="text-gray-600 hover:text-purple-600">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+                <!-- Comments Section -->
+                <div class="mt-4 space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="https://placehold.co/40x40" alt="User Avatar" class="w-8 h-8 rounded-full">
+                        <div class="flex-1">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <h4 class="font-semibold text-gray-900">Sarah M.</h4>
+                                <p class="text-gray-700">Love the collection! Can't wait to see more! 😍</p>
+                            </div>
+                            <div class="flex items-center mt-2 text-sm text-gray-600">
+                                <button class="hover:text-purple-600">Like</button>
+                                <span class="mx-2">•</span>
+                                <button class="hover:text-purple-600">Reply</button>
+                                <span class="mx-2">•</span>
+                                <span>1h ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Comment -->
+                    <div class="flex items-start space-x-3">
+                        <img src="https://placehold.co/40x40" alt="User Avatar" class="w-8 h-8 rounded-full">
+                        <div class="flex-1">
+                            <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Write a comment...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <img src="https://placehold.co/50x50" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    <div class="ml-3">
+                        <h3 class="font-semibold text-gray-900">Fashion Insider</h3>
+                        <p class="text-sm text-gray-600">5 hours ago</p>
+                    </div>
+                </div>
+                <p class="text-gray-800 mb-4">Quick style tip: Layer your accessories for a more sophisticated look. Mix different necklace lengths and combine delicate pieces with statement items. What's your favorite way to style accessories? 💎</p>
+                <div class="flex items-center justify-between border-t border-b py-3">
+                    <div class="flex space-x-6">
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-heart mr-2"></i>
+                            <span>182 Likes</span>
+                        </button>
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-comment mr-2"></i>
+                            <span>24 Comments</span>
+                        </button>
+                        <button class="flex items-center text-gray-600 hover:text-purple-600">
+                            <i class="far fa-share-square mr-2"></i>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    <button class="text-gray-600 hover:text-purple-600">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+                <!-- Add Comment -->
+                <div class="mt-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="https://placehold.co/40x40" alt="User Avatar" class="w-8 h-8 rounded-full">
+                        <div class="flex-1">
+                            <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Write a comment...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-8">
+            <button class="text-purple-600 hover:text-purple-800 font-semibold">
+                Load More Posts
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tab on Fashion</h3>
+                    <p class="text-gray-400">Your ultimate fashion destination</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@tabonfashion.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Fashion St, Style City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full">
+                        <button class="bg-purple-600 px-4 py-2 rounded-r-lg hover:bg-purple-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
