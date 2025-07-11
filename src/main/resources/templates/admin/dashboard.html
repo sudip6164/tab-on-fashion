@@ -3,195 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Tab On Fashion</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Admin Dashboard - Tab on Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="/">
-                <i class="fas fa-tshirt me-2"></i>Tab On Fashion - Admin
-            </a>
-            <div class="navbar-nav ms-auto">
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-user-shield me-1"></i><span th:text="${user.username}">Admin</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/dashboard">User Dashboard</a></li>
-                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
 
-    <div class="container-fluid mt-4">
-        <!-- Success Message -->
-        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle me-2"></i>
-            <span th:text="${successMessage}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+		<div th:replace="~{nav/adminSidebar :: adminSidebar}"></div>
 
-        <!-- Error Message -->
-        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-triangle me-2"></i>
-            <span th:text="${errorMessage}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        <!-- Main Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto">
 
-        <!-- Welcome Section -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card bg-danger text-white">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            <i class="fas fa-cogs me-2"></i>Admin Dashboard
-                        </h2>
-                        <p class="card-text">Manage your Tab On Fashion platform</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div th:replace="~{nav/adminNavbar :: adminNavbar}"></div>
 
-        <!-- Statistics Cards -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-3">
-                <div class="card text-center bg-primary text-white">
-                    <div class="card-body">
-                        <i class="fas fa-users fa-3x mb-3"></i>
-                        <h3 th:text="${stats != null ? stats.totalUsers : '0'}">0</h3>
-                        <p class="card-text">Total Users</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center bg-success text-white">
-                    <div class="card-body">
-                        <i class="fas fa-tshirt fa-3x mb-3"></i>
-                        <h3 th:text="${stats != null ? stats.totalProducts : '0'}">0</h3>
-                        <p class="card-text">Total Products</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center bg-warning text-white">
-                    <div class="card-body">
-                        <i class="fas fa-shopping-cart fa-3x mb-3"></i>
-                        <h3 th:text="${stats != null ? stats.totalOrders : '0'}">0</h3>
-                        <p class="card-text">Total Orders</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-center bg-info text-white">
-                    <div class="card-body">
-                        <i class="fas fa-dollar-sign fa-3x mb-3"></i>
-                        <h3>$<span th:text="${stats != null ? stats.totalRevenue : '0'}">0</span></h3>
-                        <p class="card-text">Total Revenue</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Management Sections -->
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="fas fa-users me-2"></i>User Management</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Manage user accounts, roles, and permissions.</p>
-                        <div class="mb-3">
-                            <small class="text-muted">
-                                Total Users: <strong th:text="${stats != null ? stats.totalUsers : '0'}">0</strong>
-                            </small>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <a href="/admin/users" class="btn btn-outline-primary">View All Users</a>
-                            <a href="/admin/users/create" class="btn btn-outline-primary">Add New User</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0"><i class="fas fa-tshirt me-2"></i>Product Management</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Add, edit, and manage fashion products.</p>
-                        <div class="mb-3">
-                            <small class="text-muted">
-                                Total Products: <strong th:text="${stats != null ? stats.totalProducts : '0'}">0</strong>
-                            </small>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <a href="/admin/products" class="btn btn-outline-success">View All Products</a>
-                            <a href="/admin/products/create" class="btn btn-outline-success">Add New Product</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-header bg-warning text-white">
-                        <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Order Management</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Track and manage customer orders.</p>
-                        <div class="mb-3">
-                            <small class="text-muted">
-                                Total Orders: <strong th:text="${stats != null ? stats.totalOrders : '0'}">0</strong><br>
-                                Pending: <strong th:text="${stats != null ? stats.pendingOrders : '0'}">0</strong>
-                            </small>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <a href="/admin/orders" class="btn btn-outline-warning">View All Orders</a>
-                            <a href="/admin/orders/pending" class="btn btn-outline-warning">Pending Orders</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Activity -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Recent Activity</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Quick Stats</h6>
-                                <ul class="list-unstyled">
-                                    <li><i class="fas fa-users text-primary me-2"></i>Users: <span th:text="${stats != null ? stats.totalUsers : '0'}">0</span></li>
-                                    <li><i class="fas fa-tshirt text-success me-2"></i>Products: <span th:text="${stats != null ? stats.totalProducts : '0'}">0</span></li>
-                                    <li><i class="fas fa-shopping-cart text-warning me-2"></i>Orders: <span th:text="${stats != null ? stats.totalOrders : '0'}">0</span></li>
-                                    <li><i class="fas fa-dollar-sign text-info me-2"></i>Revenue: $<span th:text="${stats != null ? stats.totalRevenue : '0'}">0</span></li>
-                                </ul>
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Users</p>
+                                <h3 class="text-2xl font-bold" th:text="${stats != null ? stats.totalUsers : '0'}">0</h3>
                             </div>
-                            <div class="col-md-6">
-                                <h6>System Status</h6>
-                                <div class="alert alert-success" role="alert">
-                                    <i class="fas fa-check-circle me-2"></i>All systems operational
-                                </div>
+                            <div class="text-purple-600">
+                                <i class="fas fa-chart-line text-2xl"></i>
                             </div>
                         </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up"></i> 12% increase
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Orders</p>
+                                <h3 class="text-2xl font-bold" th:text="${stats != null ? stats.totalOrders : '0'}">0</h3>
+                            </div>
+                            <div class="text-purple-600">
+                                <i class="fas fa-shopping-bag text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up"></i> 8% increase
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Products</p>
+                                <h3 class="text-2xl font-bold" th:text="${stats != null ? stats.totalProducts : '0'}">0</h3>
+                            </div>
+                            <div class="text-purple-600">
+                                <i class="fas fa-box text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up"></i> 5% increase
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Revenue</p>
+                                <h3 class="text-2xl font-bold">$124,250</h3>
+                            </div>
+                            <div class="text-purple-600">
+                                <i class="fas fa-dollar-sign text-2xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up"></i> 10% increase
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="bg-white rounded-lg shadow-sm mb-6">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-semibold">Recent Orders</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">#ORD-001</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">Premium T-Shirt</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">$29.99</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+                                            Delivered
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Products Table -->
+                <div class="bg-white rounded-lg shadow-sm">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-semibold">Recent Products</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stock</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://placehold.co/40x40" alt="Product" class="w-10 h-10 rounded">
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Premium Cotton T-Shirt</div>
+                                                <div class="text-sm text-gray-500">#PRD-001</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">Clothing</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">$29.99</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">150</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+                                            Active
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleLogout() {
+            if(confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
 </body>
-</html>
+</html> 

@@ -39,7 +39,11 @@ public class HomeController {
     }
     
     @GetMapping("/shop")
-    public String shop() {
+    public String shop(Model model, HttpSession session) {
+    	Object loggedInUser = session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+        }
         return "redirect:/products";
     }
     
@@ -68,7 +72,7 @@ public class HomeController {
         model.addAttribute("user", loggedInUser);
         model.addAttribute("cartItemCount", cartItemCount);
         model.addAttribute("orderCount", orderCount);
-        return "dashboard";
+        return "index";
     }
     
     @GetMapping("/admin/dashboard")
