@@ -41,7 +41,7 @@ public class AdminProductController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         
-        return "admin/products/list";
+        return "admin/products/products";
     }
     
     @GetMapping("/create")
